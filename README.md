@@ -6,7 +6,7 @@ Default structure for initializing front-end only projects
 
 You will need [Harp](http://harpjs.com) web server.
 
-`harp init -b omochidev/boilerplate`
+`harp init -b omochidev/front-end-boilerplate`
 
 And you're ready to code.
 

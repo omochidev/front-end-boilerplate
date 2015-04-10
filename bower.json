@@ -1,0 +1,21 @@
+{
+  "name": "boilerplate",
+  "version": "0.0.0",
+  "authors": [
+    "Rafael F. Silva <rafael@omochi.com.br>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.4",
+    "compass-mixins": "~1.0.2",
+    "jquery": "~2.1.3"
+  }
+}

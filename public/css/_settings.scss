@@ -1,0 +1,56 @@
+// Bootstrap imports and settings
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss";
+@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss";
+
+
+// Compass imports
+@import "../../bower_components/compass-mixins/lib/compass/css3/_box-sizing.scss";
+@import "../../bower_components/compass-mixins/lib/compass/css3/_transform.scss";
+@import "../../bower_components/compass-mixins/lib/compass/css3/_transition.scss";
+@import "../../bower_components/compass-mixins/lib/compass/css3/_user-interface.scss";
+
+
+// Base styles
+*,
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font: 400 $font-size-base $font-family-base;
+	color: $text-color;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.container {
+  @include container-fixed;
+
+	@media (min-width: $screen-sm-min) {
+		width: $container-sm;
+	}
+	@media (min-width: $screen-md-min) {
+		width: $container-md;
+	}
+}

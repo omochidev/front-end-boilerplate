@@ -1,19 +1,30 @@
+$grid-gutter-width: 20px;
+
+$container-desktop: 980px + $grid-gutter-width;
+$container-large-desktop: 980px + $grid-gutter-width;
+
+$text-color: #333;
+$font-size-base: 12px;
+$font-family-base: 'Comfortaa', sans-serif;
+
+@import "_settings.scss";
+
 body {
-  font-family: "Helvetica";
-  text-align: center;
-  padding: 50px 20px 0;
-  background: #f4f4f7;
-  color: #444;
-  margin: 0;
+	font-family: "Helvetica";
+	text-align: center;
+	padding: 50px 20px 0;
+	background: #f4f4f7;
+	color: #444;
+	margin: 0;
 }
 
 h1 {
-  font-size: 65px;
-  line-height: 1.2em;
-  border-bottom: #CCC solid 1px;
-  padding: 20px 0;
+	font-size: 65px;
+	line-height: 1.2em;
+	border-bottom: #CCC solid 1px;
+	padding: 20px 0;
 }
 
 h3 {
-  font-weight: 300;
+	font-weight: 300;
 }

@@ -22,7 +22,7 @@ html, body {
 	height: 100%;
 }
 
-body {
+body, input {
 	font: 400 $font-size-base $font-family-base;
 	color: $text-color;
 }
@@ -42,6 +42,10 @@ a {
 	&:hover {
 		text-decoration: underline;
 	}
+}
+
+button {
+	border: none;
 }
 
 .container {

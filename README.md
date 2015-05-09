@@ -1,4 +1,7 @@
-# Jardim Ametista
+# Front-end Boilerplate
+
+Default structure for initializing front-end only projects
+
 
 ## Requirements
 

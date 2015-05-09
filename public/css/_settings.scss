@@ -4,22 +4,110 @@
 @import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss";
 
 
-// Compass imports
-@import "../../bower_components/compass-mixins/lib/compass/css3/_box-sizing.scss";
-@import "../../bower_components/compass-mixins/lib/compass/css3/_transform.scss";
-@import "../../bower_components/compass-mixins/lib/compass/css3/_transition.scss";
-@import "../../bower_components/compass-mixins/lib/compass/css3/_user-interface.scss";
+// Useful mixins
+@mixin mq-only-mobile() {
+	@media (max-width: $screen-xs-max) {
+		@content;
+	}
+}
+
+@mixin mq-from-tablet() {
+	@media (min-width: $screen-sm-min) {
+		@content;
+	}
+}
+
+@mixin mq-to-tablet() {
+	@media (max-width: $screen-sm-max) {
+		@content;
+	}
+}
+
+@mixin mq-from-desktop() {
+	@media (min-width: $screen-md-min) {
+		@content;
+	}
+}
+
+@mixin mq-to-desktop() {
+	@media (max-width: $screen-md-max) {
+		@content;
+	}
+}
+
+@mixin mq-from-large-desktop() {
+	@media (min-width: $screen-lg-min) {
+		@content;
+	}
+}
+
+@mixin mq-to-large-desktop() {
+	@media (max-width: $screen-lg-max) {
+		@content;
+	}
+}
+
+@mixin transition($val...) {
+	-webkit-transition: $val;
+	-moz-transition: $val;
+	-o-transition: $val;
+	transition: $val;
+}
+
+@mixin transform-style($val) {
+	-webkit-transform-style: $val;
+	-ms-transform-style: $val;
+	-o-transform-style: $val;
+	transform-style: $val;
+}
+
+@mixin translate($valX, $valY) {
+	-webkit-transform: translate($valX, $valY);
+	-ms-transform: translate($valX, $valY);
+	-o-transform: translate($valX, $valY);
+	transform: translate($valX, $valY);
+}
+
+@mixin translateX($val) {
+	-webkit-transform: translateX($val);
+	-ms-transform: translateX($val);
+	-o-transform: translateX($val);
+	transform: translateX($val);
+}
+
+@mixin translateY($val) {
+	-webkit-transform: translateY($val);
+	-ms-transform: translateY($val);
+	-o-transform: translateY($val);
+	transform: translateY($val);
+}
+
+@mixin rotate($val) {
+	-webkit-transform: rotate($val);
+	-ms-transform: rotate($val);
+	-o-transform: rotate($val);
+	transform: rotate($val);
+}
+
+@mixin user-select($val) {
+	-webkit-user-select: $val;
+	-moz-user-select: $val;
+	-ms-user-select: $val;
+	user-select: $val;
+}
 
 
-// Base styles
+// Reset
 *,
 *:before,
 *:after {
-  @include box-sizing(border-box);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-html, body {
-	height: 100%;
+body {
+	position: relative;
 }
 
 body, input {
@@ -44,12 +132,24 @@ a {
 	}
 }
 
+input[type="text"], textarea {
+	border: none;
+}
+
+textarea {
+	resize: none;
+}
+
 button {
 	border: none;
 }
 
+
+// Grid
 .container {
-  @include container-fixed;
+	$grid-gutter-width-container: $grid-gutter-width !default;
+
+	@include container-fixed($grid-gutter-width-container);
 
 	@media (min-width: $screen-sm-min) {
 		width: $container-sm;

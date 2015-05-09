@@ -1,11 +1,23 @@
+//grid
 $grid-gutter-width: 20px;
+$grid-gutter-width-container: 40px;
+$container-xs: 357px + $grid-gutter-width-container;
+$container-sm: 980px + $grid-gutter-width;
+$container-md: 980px + $grid-gutter-width;
+$container-lg: 980px + $grid-gutter-width;
 
-$container-desktop: 980px + $grid-gutter-width;
-$container-large-desktop: 980px + $grid-gutter-width;
+//breakpoints
+$screen-xs-min: 357px;
+$screen-sm-min: 768px;
 
+//typo
 $text-color: #333;
 $font-size-base: 12px;
-$font-family-base: 'Comfortaa', sans-serif;
+$font-family-base: 'Arial', sans-serif;
+
+//colors
+$c-primary: #000;
+$c-secundary: #FFF;
 
 @import "_settings.scss";
 

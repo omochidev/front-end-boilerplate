@@ -96,6 +96,24 @@
 	user-select: $val;
 }
 
+@mixin animation($val) {
+	-webkit-animation: $val;
+	-moz-animation: $val;
+	animation: $val;
+}
+
+@mixin keyframes($name) {
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@keyframes #{$name} {
+		@content;
+	}
+}
+
 
 // Reset
 *,

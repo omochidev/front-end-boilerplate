@@ -1,6 +1,16 @@
 {
   "globals": {
-    "site_title": "Front-end Boilerplate",
-    "site_author": "Your Name"
+    "site": {
+      "title": "Front-end Boilerplate",
+      "description": "Another front-end site made with Harpjs",
+      "keywords": "harpjs, site",
+      "lang": "en_US",
+      "author": "Your Name"
+    },
+    "urls": {
+      "development": "http://localhost:9000",
+      "test": "http://test.site.com",
+      "production": "http://www.site.com"
+    }
   }
 }

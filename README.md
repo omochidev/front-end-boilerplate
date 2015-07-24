@@ -12,7 +12,7 @@ Default structure for initializing front-end only projects
 
 ## Initializing
 
-Install all requirements and run `npm install && bower install`
+Install all requirements and run `npm install`
 
 
 ## Development

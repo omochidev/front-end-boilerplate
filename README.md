@@ -7,14 +7,12 @@ Default structure for initializing front-end only projects
 
 [Node.js](http://nodejs.org), just download the file. Or you can install by command line following the steps here: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
 
-[Harp](http://harpjs.com), install by: `npm install -g harp`
-
 [Gulp](http://gulpjs.com), install by: `npm install -g gulp`
 
 
 ## Initializing
 
-Install all requirements and run `npm install`
+Install all requirements and run `npm install && bower install`
 
 
 ## Development

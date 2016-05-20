@@ -12,16 +12,16 @@ Default structure for initializing front-end only projects
 
 ## Initializing
 
-Install all requirements and run `npm install`
+Run `npm install`
 
 
 ## Development
 
 Run `gulp`
 
-And you're ready to code.
+And you're ready to code. You will need to serve the `public` folder, so you can do by `node server.js` or configure another server that you may prefer.
 
-When updating CSS/JS plugins, you will need to restart the server.
+When updating CSS/JS vendors, you will need to restart gulp.
 
 
 ## Deploy
@@ -31,7 +31,7 @@ First, create a secrets.json like this:
 ```
 {
   "folders": [
-    "www/**"
+    "public/**"
   ],
   "deploy": {
     "host": "ftp.site.com",

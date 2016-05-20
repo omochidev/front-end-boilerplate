@@ -1,0 +1,14 @@
+{
+  "site": {
+    "title": "Front-end Boilerplate",
+    "description": "Another front-end site",
+    "keywords": "harpjs, site",
+    "lang": "en_US",
+    "author": "Your Name"
+  },
+  "urls": {
+    "development": "http://localhost:7000",
+    "test": "http://test.site.com",
+    "production": "http://www.site.com"
+  }
+}

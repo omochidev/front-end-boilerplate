@@ -1,9 +1,9 @@
 // Bootstrap imports and settings
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss";
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss";
-@import "../../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/normalize";
 
-@import "_mixins.scss";
+@import "mixins";
 
 // Reset
 *,

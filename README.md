@@ -12,7 +12,11 @@ Default structure for initializing front-end only projects
 
 ## Initializing
 
-Run `npm install`
+Create your project folder and navigate to it.
+
+Then, run `curl -sL https://github.com/omochidev/front-end-boilerplate/tarball/master | tar xz --strip-components 1`
+
+And then, run `npm install`
 
 
 ## Development

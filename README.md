@@ -14,9 +14,10 @@ Default structure for initializing front-end only projects
 
 Create your project folder and navigate to it.
 
-Then, run `curl -sL https://github.com/omochidev/front-end-boilerplate/tarball/master | tar xz --strip-components 1`
+Then, download the project
+`curl -sL https://github.com/omochidev/front-end-boilerplate/tarball/master | tar xz --strip-components 1`
 
-And then, run `npm install`
+And finally, run `npm install`
 
 
 ## Development

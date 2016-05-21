@@ -1,3 +1,5 @@
+// Requires
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
@@ -9,80 +11,100 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var ftp = require('vinyl-ftp');
 
-var vendorStylesheets = [];
-var vendorScripts = [
-  'bower_components/jquery/dist/jquery.js'
-];
-var appFonts = ['private/fonts/**/*.*'];
-var appImages = ['private/images/**/*.*'];
-var appStylesheets = ['private/stylesheets/**/*.scss'];
-var appScripts = ['private/scripts/**/*.js'];
-var sassConfig = {
-  outputStyle: 'compressed',
-  includePaths: ['./bower_components/bootstrap-sass/assets/stylesheets']
+
+// Variables
+
+var dirs = {
+  private: './private',
+  public: './public',
+  bower: './bower_components'
 };
-var uglifyConfig = {
-  preserveComments: 'license'
+var vendor = {
+  stylesheets: [],
+  scripts: [dirs.bower + '/jquery/dist/jquery.js']
 };
+var app = {
+  fonts: [dirs.private + '/fonts/**'],
+  images: [dirs.private + '/images/**'],
+  stylesheets: [dirs.private + '/stylesheets/**/*.scss'],
+  scripts: [dirs.private + '/scripts/**/*.js'],
+  pages: [dirs.private + '/templates/pages/**.*+(html|nunjucks)'],
+  partials: [dirs.private + '/templates/partials/**.*+(html|nunjucks)'],
+  partialsTxt: dirs.private + '/templates/partials'
+};
+var configs = {
+  sass: {
+    outputStyle: 'compressed',
+    includePaths: [dirs.bower + '/bootstrap-sass/assets/stylesheets']
+  },
+  uglify: {
+    preserveComments: 'license'
+  }
+};
+
+
+// Tasks
 
 gulp.task('vendor', function() {
-  if( vendorStylesheets.length ) {
-    gulp.src(vendorScripts)
+  if( vendor.stylesheets.length ) {
+    gulp.src(vendor.stylesheets)
       .pipe(concat('vendors.css'))
-      .pipe(gulp.dest('./public/js'));
+      .pipe(gulp.dest(dirs.public + '/js'));
   }
 
-  if( vendorScripts.length ) {
-    gulp.src(vendorScripts)
+  if( vendor.scripts.length ) {
+    gulp.src(vendor.scripts)
       .pipe(concat('vendors.js'))
-      .pipe(uglify(uglifyConfig))
-      .pipe(gulp.dest('./public/js'));
+      .pipe(uglify(configs.uglify))
+      .pipe(gulp.dest(dirs.public + '/js'));
   }
 });
 
 gulp.task('app:assets', function() {
-  gulp.src(appFonts)
-    .pipe(gulp.dest('./public/fonts'));
+  gulp.src(app.fonts)
+    .pipe(gulp.dest(dirs.public + '/fonts'));
 
-  gulp.src(appImages)
-    .pipe(gulp.dest('./public/img'));
+  gulp.src(app.images)
+    .pipe(gulp.dest(dirs.public + '/img'));
 });
 
 gulp.task('app:stylesheets', function() {
-  if( appStylesheets.length ) {
-    gulp.src(appStylesheets)
+  if( app.stylesheets.length ) {
+    gulp.src(app.stylesheets)
       // .pipe(sourcemaps.init())
-      .pipe(sass(sassConfig).on('error', sass.logError))
+      .pipe(sass(configs.sass).on('error', sass.logError))
       // .pipe(sourcemaps.write())
       .pipe(autoprefixer())
-      .pipe(gulp.dest('./public/css'));
+      .pipe(gulp.dest(dirs.public + '/css'));
   }
 });
 
 gulp.task('app:scripts', function() {
-  if( appScripts.length ) {
-    gulp.src(appScripts)
-      .pipe(uglify(uglifyConfig))
-      .pipe(gulp.dest('./public/js'));
+  if( app.scripts.length ) {
+    gulp.src(app.scripts)
+      .pipe(uglify(configs.uglify))
+      .pipe(gulp.dest(dirs.public + '/js'));
   }
 });
 
 gulp.task('app:templates', function() {
-  gulp.src('private/templates/pages/**.*+(html|nunjucks)')
+  gulp.src(app.pages)
     .pipe(data(function() {
       return require('./data.json');
     }))
     .pipe(nunjucks({
-      path: ['private/templates/partials']
+      path: app.partialsTxt
     }))
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest(dirs.public));
 });
 
 gulp.task('once', ['vendor', 'app:assets', 'app:stylesheets', 'app:scripts', 'app:templates']);
 
 gulp.task('default', ['once'], function() {
-  gulp.watch(appStylesheets, ['app:stylesheets']);
-  gulp.watch(appScripts, ['app:scripts']);
+  gulp.watch([app.fonts, app.images], ['app:assets']);
+  gulp.watch(app.stylesheets, ['app:stylesheets']);
+  gulp.watch(app.scripts, ['app:scripts']);
+  gulp.watch(['data.json', app.pages, app.partials], ['app:templates']);
 });
 
 gulp.task('deploy', ['once'], function() {

@@ -49,7 +49,7 @@ gulp.task('vendor', function() {
   if( vendor.stylesheets.length ) {
     gulp.src(vendor.stylesheets)
       .pipe(concat('vendors.css'))
-      .pipe(gulp.dest(dirs.public + '/js'));
+      .pipe(gulp.dest(dirs.public + '/css'));
   }
 
   if( vendor.scripts.length ) {

@@ -15,9 +15,9 @@ var ftp = require('vinyl-ftp');
 // Variables
 
 var dirs = {
-  private: './private',
-  public: './public',
-  bower: './bower_components'
+  private: 'private',
+  public: 'public',
+  bower: 'bower_components'
 };
 var vendor = {
   stylesheets: [],

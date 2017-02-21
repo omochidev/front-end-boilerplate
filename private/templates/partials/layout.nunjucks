@@ -23,6 +23,6 @@
   <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-  {% block content %} {% endblock %}
+  {% block content %}{% endblock %}
 </body>
 </html>

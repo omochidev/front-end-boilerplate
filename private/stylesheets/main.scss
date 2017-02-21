@@ -1,27 +1,3 @@
-//grid
-$grid-gutter-width: 20px;
-$container-xs: 357px + $grid-gutter-width;
-$container-sm: 980px + $grid-gutter-width;
-$container-md: 980px + $grid-gutter-width;
-$container-lg: 980px + $grid-gutter-width;
-
-//breakpoints
-$screen-xs-min: 357px;
-$screen-sm-min: 768px;
-
-//typo
-$text-color: #333;
-$font-size-base: 12px;
-$font-family-base: Helvetica, Arial, sans-serif;
-
-//colors
-$c-primary: #000;
-$c-secundary: #FFF;
-
-//transition
-$t-base: 200ms;
-$t-base-longer: 400ms;
-
 @import "settings";
 
 body {

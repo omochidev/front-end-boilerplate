@@ -1,5 +1,11 @@
 @mixin mq-only-mobile() {
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: $screen-xs-min) {
+    @content;
+  }
+}
+
+@mixin mq-only-tablet() {
+  @media screen and (min-width: $screen-xs-max) and (max-width: $screen-sm-max) {
     @content;
   }
 }

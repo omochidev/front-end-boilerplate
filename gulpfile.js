@@ -4,7 +4,6 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-var coffee = require('gulp-coffee');
 var uglify = require('gulp-uglify');
 var nunjucks = require('gulp-nunjucks-render');
 var data = require('gulp-data');
@@ -28,7 +27,7 @@ var app = {
   fonts: [dirs.private + '/fonts/**'],
   images: [dirs.private + '/images/**'],
   stylesheets: [dirs.private + '/stylesheets/**/*.scss'],
-  scripts: [dirs.private + '/scripts/**/*.coffee'],
+  scripts: [dirs.private + '/scripts/**/*.js'],
   pages: [dirs.private + '/templates/pages/**.*+(html|nunjucks)'],
   partials: [dirs.private + '/templates/partials/**.*+(html|nunjucks)'],
   partialsTxt: dirs.private + '/templates/partials'
@@ -37,9 +36,6 @@ var configs = {
   sass: {
     outputStyle: 'compressed',
     includePaths: [dirs.bower + '/bootstrap-sass/assets/stylesheets']
-  },
-  coffee: {
-    bare: true
   },
   uglify: {
     preserveComments: 'license'
@@ -86,7 +82,6 @@ gulp.task('app:stylesheets', function() {
 gulp.task('app:scripts', function() {
   if( app.scripts.length ) {
     gulp.src(app.scripts)
-      .pipe(coffee(configs.coffee).on('error', gutil.log))
       .pipe(uglify(configs.uglify))
       .pipe(gulp.dest(dirs.public + '/js'));
   }

@@ -5,19 +5,17 @@ Default structure for initializing front-end only projects
 
 ## Requirements
 
-[Node.js](http://nodejs.org), just download the file. Or you can install by command line following the steps here: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager
+[Node.js](http://nodejs.org)
 
-[Gulp](http://gulpjs.com), install by: `npm install -g gulp`
+[Gulp.js](http://gulpjs.com)
 
 
 ## Initializing
 
-Create your project folder and navigate to it.
-
-Then, download the project
+1. Create your project folder and navigate to it.
+2. Download the project tarball
 `curl -sL https://github.com/omochidev/front-end-boilerplate/tarball/master | tar xz --strip-components 1`
-
-And finally, run `npm install`
+3. Run `npm install`
 
 
 ## Development

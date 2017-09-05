@@ -45,3 +45,10 @@
     @content;
   }
 }
+
+@mixin default-hover {
+  transition: $transition-time-base;
+  &:hover {
+    opacity: 0.6;
+  }
+}

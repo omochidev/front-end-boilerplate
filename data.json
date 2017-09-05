@@ -7,8 +7,8 @@
     "author": "Your Name"
   },
   "urls": {
-    "development": "http://localhost:7000",
-    "test": "http://test.site.com",
-    "production": "http://www.site.com"
+    "dev": "http://localhost:7000",
+    "stage": "http://stage.site.com",
+    "prod": "http://www.site.com"
   }
 }

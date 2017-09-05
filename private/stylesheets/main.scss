@@ -1,20 +1,72 @@
-@import "settings";
+/* Bootstrap */
 
-body {
-  background-color: #DCDCDC;
-  color: #333;
-  margin: 0;
-  padding: 20px;
-  text-align: center;
-}
+// Core variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
 
-h1 {
-  border-bottom: #CCC solid 1px;
-  font-size: 70px;
-  padding: 20px 0;
-}
+// Reset and dependencies
+// @import "bootstrap/normalize";
+// @import "bootstrap/print";
+// @import "bootstrap/glyphicons";
 
-h3 {
-  font-weight: 300;
-  margin: 20px 0;
-}
+// Core CSS
+// @import "bootstrap/scaffolding";
+// @import "bootstrap/type";
+// @import "bootstrap/code";
+@import "bootstrap/grid";
+// @import "bootstrap/tables";
+// @import "bootstrap/forms";
+// @import "bootstrap/buttons";
+
+// Components
+// @import "bootstrap/component-animations";
+// @import "bootstrap/dropdowns";
+// @import "bootstrap/button-groups";
+// @import "bootstrap/input-groups";
+// @import "bootstrap/navs";
+// @import "bootstrap/navbar";
+// @import "bootstrap/breadcrumbs";
+// @import "bootstrap/pagination";
+// @import "bootstrap/pager";
+// @import "bootstrap/labels";
+// @import "bootstrap/badges";
+// @import "bootstrap/jumbotron";
+// @import "bootstrap/thumbnails";
+// @import "bootstrap/alerts";
+// @import "bootstrap/progress-bars";
+// @import "bootstrap/media";
+// @import "bootstrap/list-group";
+// @import "bootstrap/panels";
+// @import "bootstrap/responsive-embed";
+// @import "bootstrap/wells";
+// @import "bootstrap/close";
+
+// Components w/ JavaScript
+// @import "bootstrap/modals";
+// @import "bootstrap/tooltip";
+// @import "bootstrap/popovers";
+// @import "bootstrap/carousel";
+
+// Utility classes
+// @import "bootstrap/utilities";
+// @import "bootstrap/responsive-utilities";
+
+
+/* App */
+
+// Vars and mixins
+@import "variables";
+@import "mixins";
+
+// Base
+@import "base/fonts";
+@import "base/reset";
+@import "base/core";
+@import "base/buttons";
+@import "base/icons";
+
+// Components
+// @import "components/";
+
+// Pages
+@import "pages/home";

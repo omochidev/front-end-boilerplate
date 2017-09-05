@@ -1,14 +1,14 @@
-/// Bootstrap vars
+/* Bootstrap */
 
-/* Colors */
-// $brand-primary: darken(#428bca, 6.5%) !default; // #337ab7
-// $brand-success: #5cb85c !default;
-// $brand-info: #5bc0de !default;
-// $brand-warning: #f0ad4e !default;
-// $brand-danger: #d9534f !default;
+// Colors
 // $body-bg: #FFF;
+// $brand-primary: darken(#428bca, 6.5%);
+// $brand-success: #5cb85c;
+// $brand-info: #5bc0de;
+// $brand-warning: #f0ad4e;
+// $brand-danger: #d9534f;
 
-/* Grid */
+// Grid
 // $grid-columns: 12;
 // $grid-gutter-width: 30px;
 // $container-xs: 420px + $grid-gutter-width;
@@ -16,24 +16,22 @@
 // $container-md: 940px + $grid-gutter-width;
 // $container-lg: 1140px + $grid-gutter-width;
 
-/* Breakpoints */
+// Breakpoints
 // $screen-xs-min: 480px;
 // $screen-sm-min: 768px;
 // $screen-md-min: 992px;
 // $screen-lg-min: 1200px;
 
-/* Typography */
+// Typography
 $text-color: #333;
-$font-size-base: 12px;
+$font-size-base: 16px;
+$font-family-sans-serif: Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
 $font-family-base: Helvetica, Arial, sans-serif;
 
 
-/// App vars
+/* App */
 
-/* Colors */
-$color-primary: #000;
-$color-secondary: #FFF;
-
-/* Transition */
+// Transition
 $transition-time-base: 200ms;
 $transition-time-base-longer: 400ms;

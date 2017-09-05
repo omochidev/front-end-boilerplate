@@ -1,0 +1,36 @@
+body {
+  background-color: $body-bg;
+  color: $text-color;
+  font: 400 $font-size-base $font-family-base;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  color: $text-color;
+  font: 400 $font-size-base $font-family-base;
+}
+
+/* Paint inputs placeholders */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: inherit;
+  opacity: 0.8;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: inherit;
+  opacity: 0.8;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: inherit;
+  opacity: 0.8;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: inherit;
+  opacity: 0.8;
+}

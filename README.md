@@ -1,13 +1,12 @@
 # Front-end Boilerplate
 
-Default structure for initializing front-end only projects
+Default structure for initializing front-end only projects, built with [Gulp](http://nodejs.org) and [Bower](http://bower.io).
 
 
 ## Requirements
 
-[Node.js](http://nodejs.org)
-
-[Gulp.js](http://gulpjs.com)
+- [Node.js](http://nodejs.org)
+- Patience and a lot of coffee
 
 
 ## Initializing
@@ -15,40 +14,13 @@ Default structure for initializing front-end only projects
 1. Create your project folder and navigate to it.
 2. Download the project tarball
 `curl -sL https://github.com/omochidev/front-end-boilerplate/tarball/master | tar xz --strip-components 1`
-3. Run `npm install`
+3. Run `npm install` so all packages will be installed.
+4. If you did not see bower downloading it packages, run it manually with `npm run postinstall`.
 
 
 ## Development
 
-Run `gulp`
-
-And you're ready to code. You will need to serve the `public` folder, so you can do by `node server.js` or configure another server that you may prefer.
+1. Run `npm start`, so the files will be watched for modifications and a server will be up at http://localhost:3000
+2. Enjoy! And do your work, too.
 
 When updating CSS/JS vendors, you will need to restart gulp.
-
-
-## Deploy
-
-First, create a secrets.json like this:
-
-```
-{
-  "folders": [
-    "public/**"
-  ],
-  "deploy": {
-    "host": "ftp.site.com",
-    "user": "user",
-    "password": "password",
-    "dest": "/var/public_html"
-  },
-  "deploy_production": {
-    "host": "ftp.siteproduction.com",
-    "user": "user",
-    "password": "password",
-    "dest": "/var/public_html"
-  }
-}
-```
-
-And then, run `gulp deploy`

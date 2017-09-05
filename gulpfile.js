@@ -1,130 +1,118 @@
-// Requires
+const path = require('path');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const runSequence = require('run-sequence');
+const del = require('del');
+const sass = require('gulp-sass');
+const autoprefixer = require('gulp-autoprefixer');
+const cleanCSS = require('gulp-clean-css');
+const uglify = require('gulp-uglify');
+const sourcemaps = require('gulp-sourcemaps');
+const nunjucks = require('gulp-nunjucks-render');
+const data = require('gulp-data');
+const concat = require('gulp-concat');
+const browserSync = require('browser-sync').create();
 
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
-var uglify = require('gulp-uglify');
-var nunjucks = require('gulp-nunjucks-render');
-var data = require('gulp-data');
-var sourcemaps = require('gulp-sourcemaps');
-var concat = require('gulp-concat');
-var ftp = require('vinyl-ftp');
+const config = require('./gulpconfig');
+const _APP_ENV = process.env.NODE_ENV || config.defaults.env;
 
-
-// Variables
-
-var dirs = {
-  private: 'private',
-  public: 'public',
-  bower: 'bower_components'
-};
-var vendor = {
-  stylesheets: [],
-  scripts: [dirs.bower + '/jquery/dist/jquery.js']
-};
-var app = {
-  fonts: [dirs.private + '/fonts/**'],
-  images: [dirs.private + '/images/**'],
-  stylesheets: [dirs.private + '/stylesheets/**/*.scss'],
-  scripts: [dirs.private + '/scripts/**/*.js'],
-  pages: [dirs.private + '/templates/pages/**.*+(html|nunjucks)'],
-  partials: [dirs.private + '/templates/partials/**.*+(html|nunjucks)'],
-  partialsTxt: dirs.private + '/templates/partials'
-};
-var configs = {
-  sass: {
-    outputStyle: 'compressed',
-    includePaths: [dirs.bower + '/bootstrap-sass/assets/stylesheets']
-  },
-  uglify: {
-    preserveComments: 'license'
-  }
-};
 
 
 // Tasks
 
-gulp.task('vendor', function() {
-  if( vendor.stylesheets.length ) {
-    gulp.src(vendor.stylesheets)
-      .pipe(concat('vendors.css'))
-      .pipe(gulp.dest(dirs.public + '/css'));
-  }
-
-  if( vendor.scripts.length ) {
-    gulp.src(vendor.scripts)
-      .pipe(concat('vendors.js'))
-      .pipe(uglify(configs.uglify))
-      .pipe(gulp.dest(dirs.public + '/js'));
-  }
+gulp.task('clean', function() {
+    return del([config.dirs.public]);
 });
 
-gulp.task('app:assets', function() {
-  gulp.src(app.fonts)
-    .pipe(gulp.dest(dirs.public + '/fonts'));
+gulp.task('vendor:stylesheets', function() {
+  return gulp.src(config.paths.vendor.stylesheets)
+  .pipe(concat('vendors.css'))
+  .pipe(cleanCSS())
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'css')));
+});
 
-  gulp.src(app.images)
-    .pipe(gulp.dest(dirs.public + '/img'));
+gulp.task('vendor:scripts', function() {
+  return gulp.src(config.paths.vendor.scripts)
+  .pipe(concat('vendors.js'))
+  .pipe(uglify(config.settings.uglify))
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'js')));
+});
+
+gulp.task('app:fonts', function() {
+  return gulp.src(config.paths.app.fonts)
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'fonts')));
+});
+
+gulp.task('app:images', function() {
+  return gulp.src(config.paths.app.images)
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'images')));
 });
 
 gulp.task('app:stylesheets', function() {
-  if( app.stylesheets.length ) {
-    gulp.src(app.stylesheets)
-      // .pipe(sourcemaps.init())
-      .pipe(sass(configs.sass).on('error', sass.logError))
-      // .pipe(sourcemaps.write())
-      .pipe(autoprefixer())
-      .pipe(gulp.dest(dirs.public + '/css'));
-  }
+  return gulp.src(config.paths.app.stylesheets)
+  .pipe(sourcemaps.init())
+  .pipe(sass(config.settings.sass).on('error', sass.logError))
+  .pipe(sourcemaps.write())
+  .pipe(autoprefixer())
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'css')))
+  .pipe(browserSync.stream());
 });
 
 gulp.task('app:scripts', function() {
-  if( app.scripts.length ) {
-    gulp.src(app.scripts)
-      .pipe(uglify(configs.uglify))
-      .pipe(gulp.dest(dirs.public + '/js'));
-  }
+  return gulp.src(config.paths.app.scripts)
+  // .pipe(concat('main.js'))
+  .pipe(sourcemaps.init())
+  .pipe(uglify(config.settings.uglify).on('error', gutil.log))
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'js')));
 });
 
 gulp.task('app:templates', function() {
-  gulp.src(app.pages)
-    .pipe(data(function() {
-      return require('./data.json');
-    }))
-    .pipe(nunjucks({
-      path: app.partialsTxt
-    }))
-    .pipe(gulp.dest(dirs.public));
+  return gulp.src(config.paths.app.pages)
+  .pipe(data(function(file) {
+    // require uncached json
+    var dataJSON = (function(module) {
+      delete require.cache[require.resolve(module)];
+      return require(module);
+    })('./data.json');
+
+    dataJSON.env = _APP_ENV;
+    dataJSON.page_id = path.basename(file.path, '.nunjucks');
+
+    return dataJSON;
+  }))
+  .pipe(nunjucks(config.settings.nunjucks).on('error', gutil.log))
+  .pipe(gulp.dest(config.dirs.public));
 });
 
-gulp.task('once', ['vendor', 'app:assets', 'app:stylesheets', 'app:scripts', 'app:templates']);
-
-gulp.task('default', ['once'], function() {
-  gulp.watch([app.fonts, app.images], ['app:assets']);
-  gulp.watch(app.stylesheets, ['app:stylesheets']);
-  gulp.watch(app.scripts, ['app:scripts']);
-  gulp.watch(['data.json', app.pages, app.partials], ['app:templates']);
-});
-
-gulp.task('deploy', ['once'], function() {
-  var env = process.env.NODE_ENV || 'test';
-  var secrets = require('./secrets.json');
-  var deployInfo = env == 'production' ? secrets.deploy_production : secrets.deploy;
-
-  console.log('--------------------------');
-  console.log('Compiled, now uploading...');
-  console.log('--------------------------');
-
-  var conn = ftp.create({
-    host: deployInfo.host,
-    user: deployInfo.user,
-    password: deployInfo.password,
-    parallel: 3,
-    log: gutil.log
+gulp.task('server', function() {
+  return browserSync.init({
+    server: config.dirs.public,
+    files: [path.join(config.dirs.public, '**', '*.*')],
+    port: process.env.PORT || config.defaults.port,
+    open: false,
+    directory: true
   });
+});
 
-  gulp.src(secrets.folders, { buffer: false } )
-    .pipe(conn.newer(deployInfo.dest))
-    .pipe(conn.dest(deployInfo.dest));
+gulp.task('compile', function(callback) {
+  runSequence(
+    ['clean'],
+    ['vendor:stylesheets', 'vendor:scripts'],
+    ['app:fonts', 'app:images', 'app:stylesheets', 'app:scripts'],
+    ['app:templates'],
+    function() {
+      callback();
+    }
+  );
+});
+
+gulp.task('default', function() {
+  runSequence('compile', 'server', function() {
+    gulp.watch(config.paths.app.fonts, ['app:fonts']);
+    gulp.watch(config.paths.app.images, ['app:images']);
+    gulp.watch(config.paths.app.stylesheets, ['app:stylesheets']);
+    gulp.watch(config.paths.app.scripts, ['app:scripts']);
+    gulp.watch(['data.json', config.paths.app.templates], ['app:templates']);
+  });
 });

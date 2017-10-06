@@ -5,30 +5,23 @@ const runSequence = require('run-sequence');
 const del = require('del');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
-const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
+const pug = require('gulp-pug');
 const nunjucks = require('gulp-nunjucks-render');
 const data = require('gulp-data');
 const concat = require('gulp-concat');
+const browserify = require('gulp-browserify');
 const browserSync = require('browser-sync').create();
 
-const config = require('./gulpconfig');
-const _APP_ENV = process.env.NODE_ENV || config.defaults.env;
-
+var config = require('./gulpconfig');
+var _APP_ENV = process.env.NODE_ENV || config.defaults.env;
 
 
 // Tasks
 
 gulp.task('clean', function() {
     return del([config.dirs.public]);
-});
-
-gulp.task('vendor:stylesheets', function() {
-  return gulp.src(config.paths.vendor.stylesheets)
-  .pipe(concat('vendors.css'))
-  .pipe(cleanCSS())
-  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'css')));
 });
 
 gulp.task('vendor:scripts', function() {
@@ -60,7 +53,7 @@ gulp.task('app:stylesheets', function() {
 
 gulp.task('app:scripts', function() {
   return gulp.src(config.paths.app.scripts)
-  // .pipe(concat('main.js'))
+  .pipe(browserify())
   .pipe(sourcemaps.init())
   .pipe(uglify(config.settings.uglify).on('error', gutil.log))
   .pipe(sourcemaps.write())
@@ -82,6 +75,7 @@ gulp.task('app:templates', function() {
     return dataJSON;
   }))
   .pipe(nunjucks(config.settings.nunjucks).on('error', gutil.log))
+  // .pipe(pug(config.settings.pug).on('error', gutil.log))
   .pipe(gulp.dest(config.dirs.public));
 });
 
@@ -98,8 +92,7 @@ gulp.task('server', function() {
 gulp.task('compile', function(callback) {
   runSequence(
     ['clean'],
-    ['vendor:stylesheets', 'vendor:scripts'],
-    ['app:fonts', 'app:images', 'app:stylesheets', 'app:scripts'],
+    ['vendor:scripts', 'app:fonts', 'app:images', 'app:stylesheets', 'app:scripts'],
     ['app:templates'],
     function() {
       callback();

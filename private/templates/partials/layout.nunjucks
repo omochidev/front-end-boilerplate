@@ -23,6 +23,16 @@
   <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-  {% block content %}{% endblock %}
+  <header class="main_header">
+    Header
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="main_footer">
+    Footer
+  </footer>
 </body>
 </html>

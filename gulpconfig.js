@@ -13,7 +13,6 @@ exports.dirs = {
 
 exports.paths = {
   vendor: {
-    stylesheets: [],
     scripts: [path.join(this.dirs.bower, 'jquery', 'dist', 'jquery.js')]
   },
   app: {
@@ -24,6 +23,8 @@ exports.paths = {
     pages: [path.join(this.dirs.private, 'templates', 'pages', '**', '*.nunjucks')],
     templates: [path.join(this.dirs.private, 'templates', '**', '*.nunjucks')]
   }
+  templates: [path.join(this.dirs.private, 'templates', '**', '*.pug')],
+  pages: [path.join(this.dirs.private, 'templates', 'pages', '**', '*.pug')]
 };
 
 exports.settings = {
@@ -37,16 +38,12 @@ exports.settings = {
   nunjucks: {
     path: [path.join(this.dirs.private, 'templates', 'partials')]
   },
-  versionNumber: {
-    value: '%MD5%',
-    append: {
-      key: 'v',
-      to: ['css', 'js']
-    }
+  pug: {
+    verbose: true
   }
 };
 
 exports.deploy = {
-    local_path: path.join('public', '**'),
-    remote_path: path.join('var', 'www')
+  local_path: path.join('public', '**'),
+  remote_path: path.join('var', 'www')
 };

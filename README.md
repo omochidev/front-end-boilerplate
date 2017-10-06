@@ -23,4 +23,4 @@ Default structure for initializing front-end only projects, built with [Gulp](ht
 1. Run `npm start`, so the files will be watched for modifications and a server will be up at http://localhost:3000
 2. Enjoy! And do your work, too.
 
-When updating CSS/JS vendors, you will need to restart gulp.
+When updating JS vendors, you will need to restart gulp.

@@ -1,6 +1,6 @@
 # Front-end Boilerplate
 
-Default structure for initializing front-end only projects, built with [Gulp](http://nodejs.org) and [Bower](http://bower.io).
+Default structure for initializing front-end only projects, built with [Gulp](http://gulpjs.com) and [Bower](http://bower.io).
 
 
 ## Requirements

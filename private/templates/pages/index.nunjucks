@@ -1,6 +1,0 @@
-{% extends "layout.nunjucks" %}
-
-{% block content %}
-<h1>Welcome.</h1>
-<h3>This is the index page. Happy coding. :)</h3>
-{% endblock %}

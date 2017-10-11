@@ -8,7 +8,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const pug = require('gulp-pug');
-const nunjucks = require('gulp-nunjucks-render');
 const data = require('gulp-data');
 const concat = require('gulp-concat');
 const browserify = require('gulp-browserify');
@@ -21,7 +20,7 @@ var _APP_ENV = process.env.NODE_ENV || config.defaults.env;
 // Tasks
 
 gulp.task('clean', function() {
-    return del([config.dirs.public]);
+  return del([config.dirs.public]);
 });
 
 gulp.task('vendor:scripts', function() {
@@ -61,7 +60,7 @@ gulp.task('app:scripts', function() {
 });
 
 gulp.task('app:templates', function() {
-  return gulp.src(config.paths.app.pages)
+  return gulp.src(config.paths.pages)
   .pipe(data(function(file) {
     // require uncached json
     var dataJSON = (function(module) {
@@ -70,12 +69,14 @@ gulp.task('app:templates', function() {
     })('./data.json');
 
     dataJSON.env = _APP_ENV;
-    dataJSON.page_id = path.basename(file.path, '.nunjucks');
+    dataJSON.page = {
+      id: path.basename(file.path, '.pug'),
+      filename: (path.basename(file.path, '.pug') + '.html')
+    };
 
     return dataJSON;
   }))
-  .pipe(nunjucks(config.settings.nunjucks).on('error', gutil.log))
-  // .pipe(pug(config.settings.pug).on('error', gutil.log))
+  .pipe(pug(config.settings.pug).on('error', gutil.log))
   .pipe(gulp.dest(config.dirs.public));
 });
 
@@ -106,6 +107,6 @@ gulp.task('default', function() {
     gulp.watch(config.paths.app.images, ['app:images']);
     gulp.watch(config.paths.app.stylesheets, ['app:stylesheets']);
     gulp.watch(config.paths.app.scripts, ['app:scripts']);
-    gulp.watch(['data.json', config.paths.app.templates], ['app:templates']);
+    gulp.watch(['data.json', config.paths.templates], ['app:templates']);
   });
 });

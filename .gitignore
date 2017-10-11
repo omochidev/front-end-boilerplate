@@ -2,6 +2,6 @@
 Thumbs.db
 npm-debug.log
 
-node_modules/*
-bower_components/*
-public/*
+node_modules
+bower_components
+public

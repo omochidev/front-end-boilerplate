@@ -4,7 +4,12 @@
     "description": "Another front-end site",
     "keywords": "site, website",
     "lang": "en_US",
-    "author": "Your Name"
+    "author": "Your Name",
+    "image": {
+      "type": "image/png",
+      "width": 200,
+      "height": 200
+    }
   },
   "urls": {
     "dev": "http://localhost:7000",

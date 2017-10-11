@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 exports.defaults = {
   port: 3000,
@@ -19,10 +19,8 @@ exports.paths = {
     fonts: [path.join(this.dirs.private, 'fonts', '**')],
     images: [path.join(this.dirs.private, 'images', '**')],
     stylesheets: [path.join(this.dirs.private, 'stylesheets', '**', '*.scss')],
-    scripts: [path.join(this.dirs.private, 'scripts', '**', '*.js')],
-    pages: [path.join(this.dirs.private, 'templates', 'pages', '**', '*.nunjucks')],
-    templates: [path.join(this.dirs.private, 'templates', '**', '*.nunjucks')]
-  }
+    scripts: [path.join(this.dirs.private, 'scripts', '**', '*.js')]
+  },
   templates: [path.join(this.dirs.private, 'templates', '**', '*.pug')],
   pages: [path.join(this.dirs.private, 'templates', 'pages', '**', '*.pug')]
 };
@@ -35,9 +33,6 @@ exports.settings = {
     ]
   },
   uglify: {},
-  nunjucks: {
-    path: [path.join(this.dirs.private, 'templates', 'partials')]
-  },
   pug: {
     verbose: true
   }

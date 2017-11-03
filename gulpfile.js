@@ -46,8 +46,7 @@ gulp.task('app:stylesheets', function() {
   .pipe(sass(config.settings.sass).on('error', sass.logError))
   .pipe(sourcemaps.write())
   .pipe(autoprefixer())
-  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'css')))
-  .pipe(browserSync.stream());
+  .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'css')));
 });
 
 gulp.task('app:scripts', function() {
@@ -86,7 +85,8 @@ gulp.task('server', function() {
     files: [path.join(config.dirs.public, '**', '*.*')],
     port: process.env.PORT || config.defaults.port,
     open: false,
-    directory: true
+    directory: true,
+    reloadDelay: 100
   });
 });
 

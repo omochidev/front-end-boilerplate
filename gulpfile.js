@@ -55,6 +55,7 @@ gulp.task('app:scripts', function() {
   .pipe(sourcemaps.init())
   .pipe(uglify(config.settings.uglify).on('error', gutil.log))
   .pipe(sourcemaps.write())
+  .pipe(concat('main.js'))
   .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'js')));
 });
 

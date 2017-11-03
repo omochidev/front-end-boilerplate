@@ -68,7 +68,7 @@ gulp.task('app:templates', function() {
       return require(module);
     })('./data.json');
 
-    dataJSON.env = _APP_ENV;
+    dataJSON.environment = _APP_ENV;
     dataJSON.page = {
       id: path.basename(file.path, '.pug'),
       filename: (path.basename(file.path, '.pug') + '.html')

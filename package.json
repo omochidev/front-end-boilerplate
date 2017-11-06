@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "./node_modules/.bin/bower install --allow-root",
     "start": "./node_modules/.bin/gulp",
-    "build": "NODE_ENV=prod ./node_modules/.bin/gulp compile"
+    "build": "./node_modules/.bin/gulp compile"
   },
   "repository": {
     "type": "git",

@@ -19,6 +19,7 @@ exports.paths = {
     fonts: [path.join(this.dirs.private, 'fonts', '**')],
     images: [path.join(this.dirs.private, 'images', '**')],
     stylesheets: [path.join(this.dirs.private, 'stylesheets', '**', '*.scss')],
+    script: path.join(this.dirs.private, 'scripts', 'main.js'),
     scripts: [path.join(this.dirs.private, 'scripts', '**', '*.js')]
   },
   templates: [path.join(this.dirs.private, 'templates', '**', '*.pug')],

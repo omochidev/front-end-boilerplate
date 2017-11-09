@@ -50,7 +50,7 @@ gulp.task('app:stylesheets', function() {
 });
 
 gulp.task('app:scripts', function() {
-  return gulp.src(config.paths.app.scripts)
+  return gulp.src(config.paths.app.script)
   .pipe(browserify())
   .pipe(sourcemaps.init())
   .pipe(uglify(config.settings.uglify).on('error', gutil.log))

@@ -12,7 +12,7 @@
     }
   },
   "urls": {
-    "dev": "http://localhost:7000",
+    "dev": "http://localhost:3000",
     "stage": "http://stage.site.com",
     "prod": "http://www.site.com"
   }

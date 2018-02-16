@@ -24,3 +24,7 @@ Default structure for initializing front-end only projects, built with [Gulp](ht
 2. Enjoy! And do your work, too.
 
 When updating JS vendors, you will need to restart gulp.
+
+## Deploy
+
+We recommend using `vinyl-ftp` or `gulp-sftp` for deploying, it will depends on which connection you are making.

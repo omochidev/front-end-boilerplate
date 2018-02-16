@@ -1,17 +1,17 @@
 const path = require('path');
 const gulp = require('gulp');
-const gutil = require('gulp-util');
+const fancyLog = require('fancy-log');
 const runSequence = require('run-sequence');
 const del = require('del');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const uglify = require('gulp-uglify');
-const sourcemaps = require('gulp-sourcemaps');
 const pug = require('gulp-pug');
 const data = require('gulp-data');
 const concat = require('gulp-concat');
 const browserify = require('gulp-browserify');
 const browserSync = require('browser-sync').create();
+const imagemin = require('gulp-imagemin');
 
 var config = require('./gulpconfig');
 var _APP_ENV = process.env.NODE_ENV || config.defaults.env;
@@ -42,9 +42,7 @@ gulp.task('app:images', function() {
 
 gulp.task('app:stylesheets', function() {
   return gulp.src(config.paths.app.stylesheets)
-  .pipe(sourcemaps.init())
   .pipe(sass(config.settings.sass).on('error', sass.logError))
-  .pipe(sourcemaps.write())
   .pipe(autoprefixer())
   .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'css')));
 });
@@ -52,9 +50,7 @@ gulp.task('app:stylesheets', function() {
 gulp.task('app:scripts', function() {
   return gulp.src(config.paths.app.script)
   .pipe(browserify())
-  .pipe(sourcemaps.init())
-  .pipe(uglify(config.settings.uglify).on('error', gutil.log))
-  .pipe(sourcemaps.write())
+  .pipe(uglify(config.settings.uglify).on('error', fancyLog))
   .pipe(concat('main.js'))
   .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'js')));
 });
@@ -76,7 +72,7 @@ gulp.task('app:templates', function() {
 
     return dataJSON;
   }))
-  .pipe(pug(config.settings.pug).on('error', gutil.log))
+  .pipe(pug(config.settings.pug).on('error', fancyLog))
   .pipe(gulp.dest(config.dirs.public));
 });
 
@@ -100,6 +96,19 @@ gulp.task('compile', function(callback) {
       callback();
     }
   );
+});
+
+gulp.task('build', function() {
+  runSequence('compile', function() {
+    return gulp.src(path.join(config.dirs.public, 'assets', 'images', '**'))
+    .pipe(imagemin([
+      imagemin.gifsicle(config.settings.imagemin.gifsicle),
+      imagemin.jpegtran(config.settings.imagemin.jpegtran),
+      imagemin.optipng(config.settings.imagemin.optipng),
+      imagemin.svgo(config.settings.imagemin.svgo)
+    ], { verbose: true }))
+    .pipe(gulp.dest(path.join(config.dirs.public, 'assets', 'images')))
+  });
 });
 
 gulp.task('default', function() {

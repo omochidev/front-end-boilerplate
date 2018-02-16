@@ -36,6 +36,19 @@ exports.settings = {
   uglify: {},
   pug: {
     verbose: true
+  },
+  imagemin: {
+    gifsicle: { interlaced: true, optimizationLevel: 3 },
+    jpegtran: { progressive: true },
+    optipng: { optimizationLevel: 7, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true },
+    svgo: {
+      plugins: [
+        { removeComments: true },
+        { removeViewBox: true },
+        { cleanupIDs: false },
+        { minifyStyles: true }
+      ]
+    }
   }
 };
 

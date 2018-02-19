@@ -11,8 +11,6 @@ const taskAppScripts = require('./tasks/app-scripts');
 const taskAppTemplates = require('./tasks/app-templates');
 const taskCompile = require('./tasks/compile');
 
-// Tasks
-
 module.exports = function() {
   gulp.task('clean', taskClean);
 
